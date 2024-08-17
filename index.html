@@ -2,15 +2,16 @@
 <html>
 <head>
   <title>Wordbind Solver</title>
-  <link href="/style/style.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/styles/style.css" >
 </head>
 <body style="margin:2em;">
   <h1>Wordbind Solver</h1>
   <p>But probably just have fun.</p>
-  <label for="input">Enter a word or phrase:</label>
-  <input type="text" id="input" name="input">
-  <button onclick="findWords()">Find Words</button>
+  <div class="search">
+    <input type="text" id="input" name="input" placeholder="Enter the word/phrase">
+    <button onclick="findWords()">Find Words</button>
+    <p class="messaging"><small>Enter the phrase without spaces for optimal results.</small></p>
+  </div>
   <div id="output"></div>
 
   <script>
