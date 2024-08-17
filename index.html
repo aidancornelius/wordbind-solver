@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wordbind Solver</title>
+  <link href="/style/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/styles/style.css" >
+</head>
+<body>
+  <h1>Wordbind Solver</h1>
+  <p>But probably just have fun.</p>
+  <label for="input">Enter a word or phrase:</label>
+  <input type="text" id="input" name="input">
+  <button onclick="findWords()">Find Words</button>
+  <div id="output"></div>
+
+  <script>
+    let words = [];
+
+    // Load the word list
+    fetch('enable1.txt')
+      .then(response => response.text())
+      .then(data => {
+        words = data.split('\n').map(word => word.toLowerCase());
+      });
+
+    function isValidWord(word, input) {
+      let index = -1;
+      for (const letter of word) {
+        index = input.indexOf(letter, index + 1);
+        if (index === -1) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function findWords() {
+      const input = document.getElementById('input').value.toLowerCase();
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+
+      const validWords = [];
+
+      for (const word of words) {
+        if (isValidWord(word, input)) {
+          validWords.push(word);
+        }
+      }
+
+      // Sort the valid words by length in descending order
+      validWords.sort((a, b) => b.length - a.length);
+
+      // Display the sorted words in the output
+      for (const word of validWords) {
+        output.innerHTML += word + '<br>';
+      }
+    }
+  </script>
+</body>
+</html>
